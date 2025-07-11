@@ -91,12 +91,12 @@ sudo npm install -g pm2
 
 6. **Create PM2 ecosystem file**:
 ```bash
-# Create ecosystem.config.js (see below)
+# Create ecosystem.config.cjs (see below)
 ```
 
 7. **Start with PM2**:
 ```bash
-pm2 start ecosystem.config.js
+pm2 start ecosystem.config.cjs
 pm2 save
 pm2 startup
 ```
