@@ -2,7 +2,8 @@
 import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
-import { courses } from '../../lib/supabase';
+import CourseModules from '../../components/CourseModules.astro';
+import { courses, trainers } from '../../lib/supabase';
 
 const { id } = Astro.params;
 const course = courses.find(c => c.id === id);
@@ -10,6 +11,11 @@ const course = courses.find(c => c.id === id);
 if (!course) {
   return Astro.redirect('/courses');
 }
+
+// Get trainers for this course
+const courseTrainers = trainers.filter(trainer => 
+  trainer.coursesTeaching.includes(course.id)
+);
 
 export function getStaticPaths() {
   return courses.map(course => ({
@@ -58,7 +64,7 @@ export function getStaticPaths() {
           
           <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
             <h2 class="text-2xl font-bold text-gray-900 mb-6">What You'll Learn</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="grid grid-cols-1 gap-4">
               {course.features.map(feature => (
                 <div class="flex items-center">
                   <svg class="w-5 h-5 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -70,13 +76,115 @@ export function getStaticPaths() {
             </div>
           </div>
           
+          <!-- Course Modules -->
+          {course.modules && (
+            <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+              <CourseModules modules={course.modules} />
+            </div>
+          )}
+          
+          <!-- Course Instructors -->
+          {courseTrainers.length > 0 && (
+            <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+              <h2 class="text-2xl font-bold text-gray-900 mb-6">Your Instructors</h2>
+              <div class="space-y-6">
+                {courseTrainers.map(trainer => (
+                  <div class="flex items-start space-x-4 p-4 bg-gray-50 rounded-lg">
+                    <img 
+                      src={trainer.image} 
+                      alt={trainer.name}
+                      class="w-16 h-16 rounded-full object-cover"
+                    />
+                    <div class="flex-1">
+                      <h3 class="text-lg font-semibold text-gray-900">{trainer.name}</h3>
+                      <p class="text-coral-500 text-sm mb-2">{trainer.title}</p>
+                      <p class="text-gray-600 text-sm mb-3">{trainer.bio}</p>
+                      <div class="flex flex-wrap gap-2">
+                        {trainer.specializations.slice(0, 4).map(spec => (
+                          <span class="bg-coral-100 text-coral-700 px-2 py-1 rounded text-xs">
+                            {spec}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+          
+          <!-- Course Prerequisites -->
           <div class="bg-white rounded-lg shadow-lg p-8">
-            <h2 class="text-2xl font-bold text-gray-900 mb-6">Course Overview</h2>
-            <p class="text-gray-600 mb-6">{course.description}</p>
-            <p class="text-gray-600">
-              This comprehensive {course.duration} course is designed for {course.level.toLowerCase()} level students 
-              who want to master the latest technologies and advance their careers in the tech industry.
-            </p>
+            <h2 class="text-2xl font-bold text-gray-900 mb-6">Prerequisites & Requirements</h2>
+            
+            {course.id === 'aws-3-in-1' && (
+              <div class="space-y-4">
+                <div>
+                  <h3 class="text-lg font-semibold text-gray-900 mb-2">Prerequisites:</h3>
+                  <ul class="list-disc list-inside text-gray-600 space-y-1">
+                    <li>Basic understanding of IT concepts</li>
+                    <li>Familiarity with networking fundamentals</li>
+                    <li>Basic knowledge of operating systems (Windows/Linux)</li>
+                  </ul>
+                </div>
+                <div>
+                  <h3 class="text-lg font-semibold text-gray-900 mb-2">What's Included:</h3>
+                  <ul class="list-disc list-inside text-gray-600 space-y-1">
+                    <li>Access to AWS Free Tier account guidance</li>
+                    <li>All course materials and lab guides</li>
+                    <li>Practice exams for all three certifications</li>
+                    <li>1-year access to course updates</li>
+                    <li>Certificate of completion</li>
+                  </ul>
+                </div>
+              </div>
+            )}
+            
+            {course.id === 'devops-zero-to-hero' && (
+              <div class="space-y-4">
+                <div>
+                  <h3 class="text-lg font-semibold text-gray-900 mb-2">Prerequisites:</h3>
+                  <ul class="list-disc list-inside text-gray-600 space-y-1">
+                    <li>Basic Linux command line knowledge</li>
+                    <li>Understanding of software development lifecycle</li>
+                    <li>Basic networking concepts</li>
+                    <li>Familiarity with any programming language (preferred)</li>
+                  </ul>
+                </div>
+                <div>
+                  <h3 class="text-lg font-semibold text-gray-900 mb-2">Tools You'll Master:</h3>
+                  <ul class="list-disc list-inside text-gray-600 space-y-1">
+                    <li>Git, Jenkins, Docker, Kubernetes</li>
+                    <li>Terraform, Ansible, Prometheus, Grafana</li>
+                    <li>AWS/Azure cloud platforms</li>
+                    <li>Various monitoring and logging tools</li>
+                  </ul>
+                </div>
+              </div>
+            )}
+            
+            {course.id === 'cybersecurity-zero-to-hero' && (
+              <div class="space-y-4">
+                <div>
+                  <h3 class="text-lg font-semibold text-gray-900 mb-2">Prerequisites:</h3>
+                  <ul class="list-disc list-inside text-gray-600 space-y-1">
+                    <li>Basic computer and networking knowledge</li>
+                    <li>Understanding of operating systems</li>
+                    <li>Basic knowledge of web technologies</li>
+                    <li>Ethical mindset and commitment to responsible disclosure</li>
+                  </ul>
+                </div>
+                <div>
+                  <h3 class="text-lg font-semibold text-gray-900 mb-2">Certification Preparation:</h3>
+                  <ul class="list-disc list-inside text-gray-600 space-y-1">
+                    <li>Certified Ethical Hacker (CEH)</li>
+                    <li>CompTIA Security+</li>
+                    <li>CISSP Associate</li>
+                    <li>GCIH (GIAC Certified Incident Handler)</li>
+                  </ul>
+                </div>
+              </div>
+            )}
           </div>
         </div>
         
@@ -107,14 +215,22 @@ export function getStaticPaths() {
                 <span class="text-gray-600">Support:</span>
                 <span class="font-semibold">24/7</span>
               </div>
+              <div class="flex justify-between">
+                <span class="text-gray-600">Access:</span>
+                <span class="font-semibold">Lifetime</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-gray-600">Language:</span>
+                <span class="font-semibold">English/Urdu</span>
+              </div>
             </div>
             
-            <div class="space-y-3">
+            <div class="space-y-3 mb-6">
               <a 
                 href={`/enroll/${course.id}`} 
                 class="w-full bg-coral-500 hover:bg-coral-600 text-white px-6 py-3 rounded-lg font-semibold text-center block transition-colors"
               >
-                Enroll Now
+                {course.is_free ? 'Enroll Free' : 'Enroll Now'}
               </a>
               <a 
                 href="/contact" 
@@ -122,6 +238,43 @@ export function getStaticPaths() {
               >
                 Ask Questions
               </a>
+            </div>
+            
+            <!-- Course Features -->
+            <div class="border-t pt-6">
+              <h3 class="font-semibold text-gray-900 mb-4">This course includes:</h3>
+              <div class="space-y-3 text-sm">
+                <div class="flex items-center">
+                  <svg class="w-4 h-4 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  <span class="text-gray-600">Hands-on labs and projects</span>
+                </div>
+                <div class="flex items-center">
+                  <svg class="w-4 h-4 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  <span class="text-gray-600">Live instructor support</span>
+                </div>
+                <div class="flex items-center">
+                  <svg class="w-4 h-4 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  <span class="text-gray-600">Practice exams</span>
+                </div>
+                <div class="flex items-center">
+                  <svg class="w-4 h-4 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  <span class="text-gray-600">Career guidance</span>
+                </div>
+                <div class="flex items-center">
+                  <svg class="w-4 h-4 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  <span class="text-gray-600">Community access</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
