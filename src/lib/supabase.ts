@@ -15,6 +15,20 @@ export const trainers = [
     image: '/images/trainers/usman.jpg',
     bio: 'Trainer with 4+ years of cloud and DevOps experience. Led 500+ students across AWS/GCP certifications.',
     specializations: ['AWS', 'GCP', 'Kubernetes', 'Terraform', 'DevOps'],
+    teachingPhilosophy: 'I believe in hands-on learning and real-world application of cloud technologies to prepare students for industry challenges.',
+    experience: [
+      'AWS Solutions Architect Professional',
+      'Google Cloud Professional Cloud Architect',
+      '4+ years in DevOps and Cloud Infrastructure',
+      'Led cloud migration projects for enterprise clients'
+    ],
+    certifications: [
+      'AWS Solutions Architect Professional',
+      'AWS DevOps Engineer Professional',
+      'Google Cloud Professional Cloud Architect',
+      'Certified Kubernetes Administrator (CKA)'
+    ],
+    coursesTeaching: ['aws-2-in-1', 'devops-engineering', 'kubernetes'],
     successStats: {
       passRate: '95%',
       careerAdvancement: '90%',
@@ -28,6 +42,20 @@ export const trainers = [
     image: '/images/trainers/sarah.jpg',
     bio: 'Specialist in Azure DevOps and CI/CD automation with real-world consulting experience.',
     specializations: ['Azure', 'CI/CD', 'Ansible', 'Jenkins'],
+    teachingPhilosophy: 'I focus on practical DevOps implementation and automation strategies that students can immediately apply in their careers.',
+    experience: [
+      'Microsoft Certified: Azure Solutions Architect Expert',
+      '5+ years in DevOps and CI/CD implementation',
+      'Azure DevOps consultant for Fortune 500 companies',
+      'Led automation initiatives reducing deployment time by 80%'
+    ],
+    certifications: [
+      'Microsoft Certified: Azure Solutions Architect Expert',
+      'Microsoft Certified: DevOps Engineer Expert',
+      'Jenkins Certified Engineer',
+      'Ansible Certified Specialist'
+    ],
+    coursesTeaching: ['azure-2-in-1', 'devops-engineering'],
     successStats: {
       passRate: '92%',
       careerAdvancement: '85%',
