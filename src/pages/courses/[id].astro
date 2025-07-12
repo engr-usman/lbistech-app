@@ -2,7 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
-import { courses } from '../../lib/supabase';
+import { courses, trainers } from '../../lib/supabase';
 
 const { id } = Astro.params;
 const course = courses.find(c => c.id === id);
@@ -58,7 +58,7 @@ export function getStaticPaths() {
           
           <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
             <h2 class="text-2xl font-bold text-gray-900 mb-6">What You'll Learn</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="grid grid-cols-1 gap-4">
               {course.features.map(feature => (
                 <div class="flex items-center">
                   <svg class="w-5 h-5 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -72,11 +72,410 @@ export function getStaticPaths() {
           
           <div class="bg-white rounded-lg shadow-lg p-8">
             <h2 class="text-2xl font-bold text-gray-900 mb-6">Course Overview</h2>
-            <p class="text-gray-600 mb-6">{course.description}</p>
-            <p class="text-gray-600">
-              This comprehensive {course.duration} course is designed for {course.level.toLowerCase()} level students 
-              who want to master the latest technologies and advance their careers in the tech industry.
-            </p>
+            
+            {course.id === 'aws-2-in-1' && (
+              <div class="space-y-6">
+                <p class="text-gray-600 text-lg">{course.description}</p>
+                
+                <div>
+                  <h3 class="text-xl font-semibold text-gray-900 mb-3">Course Curriculum</h3>
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="space-y-2">
+                      <div class="flex items-center">
+                        <span class="w-2 h-2 bg-coral-500 rounded-full mr-3"></span>
+                        <span class="text-gray-700">AWS Cloud Fundamentals & Core Services</span>
+                      </div>
+                      <div class="flex items-center">
+                        <span class="w-2 h-2 bg-coral-500 rounded-full mr-3"></span>
+                        <span class="text-gray-700">AWS Compute Services (EC2, Lambda, ECS)</span>
+                      </div>
+                      <div class="flex items-center">
+                        <span class="w-2 h-2 bg-coral-500 rounded-full mr-3"></span>
+                        <span class="text-gray-700">AWS Storage & Database Services</span>
+                      </div>
+                      <div class="flex items-center">
+                        <span class="w-2 h-2 bg-coral-500 rounded-full mr-3"></span>
+                        <span class="text-gray-700">AWS Networking & Content Delivery</span>
+                      </div>
+                      <div class="flex items-center">
+                        <span class="w-2 h-2 bg-coral-500 rounded-full mr-3"></span>
+                        <span class="text-gray-700">AWS Security & Identity Management</span>
+                      </div>
+                    </div>
+                    <div class="space-y-2">
+                      <div class="flex items-center">
+                        <span class="w-2 h-2 bg-coral-500 rounded-full mr-3"></span>
+                        <span class="text-gray-700">AWS Monitoring & Logging</span>
+                      </div>
+                      <div class="flex items-center">
+                        <span class="w-2 h-2 bg-coral-500 rounded-full mr-3"></span>
+                        <span class="text-gray-700">AWS Deployment & Management</span>
+                      </div>
+                      <div class="flex items-center">
+                        <span class="w-2 h-2 bg-coral-500 rounded-full mr-3"></span>
+                        <span class="text-gray-700">AWS Application Integration</span>
+                      </div>
+                      <div class="flex items-center">
+                        <span class="w-2 h-2 bg-coral-500 rounded-full mr-3"></span>
+                        <span class="text-gray-700">Hands-on Labs & Real-world Projects</span>
+                      </div>
+                      <div class="flex items-center">
+                        <span class="w-2 h-2 bg-coral-500 rounded-full mr-3"></span>
+                        <span class="text-gray-700">Certification Exam Preparation</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div>
+                  <h3 class="text-xl font-semibold text-gray-900 mb-3">Prerequisites</h3>
+                  <p class="text-gray-600">Basic understanding of cloud computing concepts</p>
+                </div>
+                
+                <div>
+                  <h3 class="text-xl font-semibold text-gray-900 mb-3">Certification</h3>
+                  <p class="text-gray-600">AWS Solutions Architect Associate & AWS Developer Associate</p>
+                </div>
+              </div>
+            )}
+            
+            {course.id === 'devops-engineering' && (
+              <div class="space-y-6">
+                <p class="text-gray-600 text-lg">{course.description}</p>
+                
+                <div>
+                  <h3 class="text-xl font-semibold text-gray-900 mb-3">Course Curriculum</h3>
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="space-y-2">
+                      <div class="flex items-center">
+                        <span class="w-2 h-2 bg-coral-500 rounded-full mr-3"></span>
+                        <span class="text-gray-700">DevOps Fundamentals & Culture</span>
+                      </div>
+                      <div class="flex items-center">
+                        <span class="w-2 h-2 bg-coral-500 rounded-full mr-3"></span>
+                        <span class="text-gray-700">Version Control with Git & GitHub</span>
+                      </div>
+                      <div class="flex items-center">
+                        <span class="w-2 h-2 bg-coral-500 rounded-full mr-3"></span>
+                        <span class="text-gray-700">CI/CD Pipeline Implementation</span>
+                      </div>
+                      <div class="flex items-center">
+                        <span class="w-2 h-2 bg-coral-500 rounded-full mr-3"></span>
+                        <span class="text-gray-700">Containerization with Docker</span>
+                      </div>
+                      <div class="flex items-center">
+                        <span class="w-2 h-2 bg-coral-500 rounded-full mr-3"></span>
+                        <span class="text-gray-700">Container Orchestration with Kubernetes</span>
+                      </div>
+                      <div class="flex items-center">
+                        <span class="w-2 h-2 bg-coral-500 rounded-full mr-3"></span>
+                        <span class="text-gray-700">Infrastructure as Code with Terraform</span>
+                      </div>
+                    </div>
+                    <div class="space-y-2">
+                      <div class="flex items-center">
+                        <span class="w-2 h-2 bg-coral-500 rounded-full mr-3"></span>
+                        <span class="text-gray-700">Configuration Management with Ansible</span>
+                      </div>
+                      <div class="flex items-center">
+                        <span class="w-2 h-2 bg-coral-500 rounded-full mr-3"></span>
+                        <span class="text-gray-700">Monitoring & Logging (Prometheus, Grafana)</span>
+                      </div>
+                      <div class="flex items-center">
+                        <span class="w-2 h-2 bg-coral-500 rounded-full mr-3"></span>
+                        <span class="text-gray-700">Cloud Platform Integration</span>
+                      </div>
+                      <div class="flex items-center">
+                        <span class="w-2 h-2 bg-coral-500 rounded-full mr-3"></span>
+                        <span class="text-gray-700">Security in DevOps (DevSecOps)</span>
+                      </div>
+                      <div class="flex items-center">
+                        <span class="w-2 h-2 bg-coral-500 rounded-full mr-3"></span>
+                        <span class="text-gray-700">Microservices Architecture</span>
+                      </div>
+                      <div class="flex items-center">
+                        <span class="w-2 h-2 bg-coral-500 rounded-full mr-3"></span>
+                        <span class="text-gray-700">Performance Testing & Optimization</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div>
+                  <h3 class="text-xl font-semibold text-gray-900 mb-3">Prerequisites</h3>
+                  <p class="text-gray-600">Basic Linux knowledge and programming experience</p>
+                </div>
+                
+                <div>
+                  <h3 class="text-xl font-semibold text-gray-900 mb-3">Certification</h3>
+                  <p class="text-gray-600">Industry-recognized DevOps certification</p>
+                </div>
+              </div>
+            )}
+            
+            {course.id === 'azure-2-in-1' && (
+              <div class="space-y-6">
+                <p class="text-gray-600 text-lg">{course.description}</p>
+                
+                <div>
+                  <h3 class="text-xl font-semibold text-gray-900 mb-3">Course Curriculum</h3>
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="space-y-2">
+                      <div class="flex items-center">
+                        <span class="w-2 h-2 bg-coral-500 rounded-full mr-3"></span>
+                        <span class="text-gray-700">Azure Cloud Fundamentals & Core Services</span>
+                      </div>
+                      <div class="flex items-center">
+                        <span class="w-2 h-2 bg-coral-500 rounded-full mr-3"></span>
+                        <span class="text-gray-700">Azure Compute Services</span>
+                      </div>
+                      <div class="flex items-center">
+                        <span class="w-2 h-2 bg-coral-500 rounded-full mr-3"></span>
+                        <span class="text-gray-700">Azure Storage Solutions & Databases</span>
+                      </div>
+                      <div class="flex items-center">
+                        <span class="w-2 h-2 bg-coral-500 rounded-full mr-3"></span>
+                        <span class="text-gray-700">Azure Networking & Virtual Networks</span>
+                      </div>
+                      <div class="flex items-center">
+                        <span class="w-2 h-2 bg-coral-500 rounded-full mr-3"></span>
+                        <span class="text-gray-700">Azure Identity & Access Management</span>
+                      </div>
+                    </div>
+                    <div class="space-y-2">
+                      <div class="flex items-center">
+                        <span class="w-2 h-2 bg-coral-500 rounded-full mr-3"></span>
+                        <span class="text-gray-700">Azure Security & Compliance</span>
+                      </div>
+                      <div class="flex items-center">
+                        <span class="w-2 h-2 bg-coral-500 rounded-full mr-3"></span>
+                        <span class="text-gray-700">Azure Monitoring & Governance</span>
+                      </div>
+                      <div class="flex items-center">
+                        <span class="w-2 h-2 bg-coral-500 rounded-full mr-3"></span>
+                        <span class="text-gray-700">Azure Resource Management</span>
+                      </div>
+                      <div class="flex items-center">
+                        <span class="w-2 h-2 bg-coral-500 rounded-full mr-3"></span>
+                        <span class="text-gray-700">Azure DevOps & CI/CD Integration</span>
+                      </div>
+                      <div class="flex items-center">
+                        <span class="w-2 h-2 bg-coral-500 rounded-full mr-3"></span>
+                        <span class="text-gray-700">Certification Exam Preparation</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div>
+                  <h3 class="text-xl font-semibold text-gray-900 mb-3">Prerequisites</h3>
+                  <p class="text-gray-600">Basic understanding of cloud computing</p>
+                </div>
+                
+                <div>
+                  <h3 class="text-xl font-semibold text-gray-900 mb-3">Certification</h3>
+                  <p class="text-gray-600">Azure Fundamentals (AZ-900) & Azure Administrator Associate (AZ-104)</p>
+                </div>
+              </div>
+            )}
+            
+            {course.id === 'linux-deep-dive' && (
+              <div class="space-y-6">
+                <p class="text-gray-600 text-lg">{course.description}</p>
+                
+                <div>
+                  <h3 class="text-xl font-semibold text-gray-900 mb-3">Course Curriculum</h3>
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="space-y-2">
+                      <div class="flex items-center">
+                        <span class="w-2 h-2 bg-coral-500 rounded-full mr-3"></span>
+                        <span class="text-gray-700">Linux Fundamentals & System Architecture</span>
+                      </div>
+                      <div class="flex items-center">
+                        <span class="w-2 h-2 bg-coral-500 rounded-full mr-3"></span>
+                        <span class="text-gray-700">Command Line Mastery & Shell Scripting</span>
+                      </div>
+                      <div class="flex items-center">
+                        <span class="w-2 h-2 bg-coral-500 rounded-full mr-3"></span>
+                        <span class="text-gray-700">File System Management & Permissions</span>
+                      </div>
+                      <div class="flex items-center">
+                        <span class="w-2 h-2 bg-coral-500 rounded-full mr-3"></span>
+                        <span class="text-gray-700">User & Group Management</span>
+                      </div>
+                      <div class="flex items-center">
+                        <span class="w-2 h-2 bg-coral-500 rounded-full mr-3"></span>
+                        <span class="text-gray-700">Process Management & System Monitoring</span>
+                      </div>
+                    </div>
+                    <div class="space-y-2">
+                      <div class="flex items-center">
+                        <span class="w-2 h-2 bg-coral-500 rounded-full mr-3"></span>
+                        <span class="text-gray-700">Network Configuration & Security</span>
+                      </div>
+                      <div class="flex items-center">
+                        <span class="w-2 h-2 bg-coral-500 rounded-full mr-3"></span>
+                        <span class="text-gray-700">System Performance Tuning</span>
+                      </div>
+                      <div class="flex items-center">
+                        <span class="w-2 h-2 bg-coral-500 rounded-full mr-3"></span>
+                        <span class="text-gray-700">Backup & Recovery Strategies</span>
+                      </div>
+                      <div class="flex items-center">
+                        <span class="w-2 h-2 bg-coral-500 rounded-full mr-3"></span>
+                        <span class="text-gray-700">Linux Security Hardening</span>
+                      </div>
+                      <div class="flex items-center">
+                        <span class="w-2 h-2 bg-coral-500 rounded-full mr-3"></span>
+                        <span class="text-gray-700">Advanced Shell Scripting & Automation</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div>
+                  <h3 class="text-xl font-semibold text-gray-900 mb-3">Prerequisites</h3>
+                  <p class="text-gray-600">Basic computer knowledge</p>
+                </div>
+                
+                <div>
+                  <h3 class="text-xl font-semibold text-gray-900 mb-3">Certification</h3>
+                  <p class="text-gray-600">Linux system administration certification</p>
+                </div>
+              </div>
+            )}
+            
+            {course.id === 'kubernetes' && (
+              <div class="space-y-6">
+                <p class="text-gray-600 text-lg">{course.description}</p>
+                
+                <div>
+                  <h3 class="text-xl font-semibold text-gray-900 mb-3">Course Curriculum</h3>
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="space-y-2">
+                      <div class="flex items-center">
+                        <span class="w-2 h-2 bg-coral-500 rounded-full mr-3"></span>
+                        <span class="text-gray-700">Kubernetes Architecture & Core Concepts</span>
+                      </div>
+                      <div class="flex items-center">
+                        <span class="w-2 h-2 bg-coral-500 rounded-full mr-3"></span>
+                        <span class="text-gray-700">Pods, Services, and Deployments</span>
+                      </div>
+                      <div class="flex items-center">
+                        <span class="w-2 h-2 bg-coral-500 rounded-full mr-3"></span>
+                        <span class="text-gray-700">ConfigMaps & Secrets Management</span>
+                      </div>
+                      <div class="flex items-center">
+                        <span class="w-2 h-2 bg-coral-500 rounded-full mr-3"></span>
+                        <span class="text-gray-700">Persistent Volumes & Storage</span>
+                      </div>
+                      <div class="flex items-center">
+                        <span class="w-2 h-2 bg-coral-500 rounded-full mr-3"></span>
+                        <span class="text-gray-700">Networking & Service Discovery</span>
+                      </div>
+                    </div>
+                    <div class="space-y-2">
+                      <div class="flex items-center">
+                        <span class="w-2 h-2 bg-coral-500 rounded-full mr-3"></span>
+                        <span class="text-gray-700">Kubernetes Security & RBAC</span>
+                      </div>
+                      <div class="flex items-center">
+                        <span class="w-2 h-2 bg-coral-500 rounded-full mr-3"></span>
+                        <span class="text-gray-700">Monitoring & Logging in Kubernetes</span>
+                      </div>
+                      <div class="flex items-center">
+                        <span class="w-2 h-2 bg-coral-500 rounded-full mr-3"></span>
+                        <span class="text-gray-700">Helm Charts & Package Management</span>
+                      </div>
+                      <div class="flex items-center">
+                        <span class="w-2 h-2 bg-coral-500 rounded-full mr-3"></span>
+                        <span class="text-gray-700">CI/CD with Kubernetes</span>
+                      </div>
+                      <div class="flex items-center">
+                        <span class="w-2 h-2 bg-coral-500 rounded-full mr-3"></span>
+                        <span class="text-gray-700">Troubleshooting & Best Practices</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div>
+                  <h3 class="text-xl font-semibold text-gray-900 mb-3">Prerequisites</h3>
+                  <p class="text-gray-600">Docker knowledge required</p>
+                </div>
+                
+                <div>
+                  <h3 class="text-xl font-semibold text-gray-900 mb-3">Certification</h3>
+                  <p class="text-gray-600">Certified Kubernetes Administrator (CKA)</p>
+                </div>
+              </div>
+            )}
+            
+            {course.id === 'docker' && (
+              <div class="space-y-6">
+                <p class="text-gray-600 text-lg">{course.description}</p>
+                
+                <div>
+                  <h3 class="text-xl font-semibold text-gray-900 mb-3">Course Curriculum</h3>
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="space-y-2">
+                      <div class="flex items-center">
+                        <span class="w-2 h-2 bg-coral-500 rounded-full mr-3"></span>
+                        <span class="text-gray-700">Docker Fundamentals & Architecture</span>
+                      </div>
+                      <div class="flex items-center">
+                        <span class="w-2 h-2 bg-coral-500 rounded-full mr-3"></span>
+                        <span class="text-gray-700">Docker Images & Containers</span>
+                      </div>
+                      <div class="flex items-center">
+                        <span class="w-2 h-2 bg-coral-500 rounded-full mr-3"></span>
+                        <span class="text-gray-700">Dockerfile Best Practices</span>
+                      </div>
+                      <div class="flex items-center">
+                        <span class="w-2 h-2 bg-coral-500 rounded-full mr-3"></span>
+                        <span class="text-gray-700">Docker Networking & Storage</span>
+                      </div>
+                      <div class="flex items-center">
+                        <span class="w-2 h-2 bg-coral-500 rounded-full mr-3"></span>
+                        <span class="text-gray-700">Docker Compose & Multi-container Apps</span>
+                      </div>
+                    </div>
+                    <div class="space-y-2">
+                      <div class="flex items-center">
+                        <span class="w-2 h-2 bg-coral-500 rounded-full mr-3"></span>
+                        <span class="text-gray-700">Docker Registry & Image Management</span>
+                      </div>
+                      <div class="flex items-center">
+                        <span class="w-2 h-2 bg-coral-500 rounded-full mr-3"></span>
+                        <span class="text-gray-700">Container Security & Best Practices</span>
+                      </div>
+                      <div class="flex items-center">
+                        <span class="w-2 h-2 bg-coral-500 rounded-full mr-3"></span>
+                        <span class="text-gray-700">Docker in Production Environments</span>
+                      </div>
+                      <div class="flex items-center">
+                        <span class="w-2 h-2 bg-coral-500 rounded-full mr-3"></span>
+                        <span class="text-gray-700">Integration with CI/CD Pipelines</span>
+                      </div>
+                      <div class="flex items-center">
+                        <span class="w-2 h-2 bg-coral-500 rounded-full mr-3"></span>
+                        <span class="text-gray-700">Migration to Kubernetes</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div>
+                  <h3 class="text-xl font-semibold text-gray-900 mb-3">Prerequisites</h3>
+                  <p class="text-gray-600">Basic Linux knowledge</p>
+                </div>
+                
+                <div>
+                  <h3 class="text-xl font-semibold text-gray-900 mb-3">Certification</h3>
+                  <p class="text-gray-600">Docker Certified Associate</p>
+                </div>
+              </div>
+            )}
           </div>
         </div>
         
@@ -106,6 +505,10 @@ export function getStaticPaths() {
               <div class="flex justify-between">
                 <span class="text-gray-600">Support:</span>
                 <span class="font-semibold">24/7</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-gray-600">Access:</span>
+                <span class="font-semibold">Lifetime</span>
               </div>
             </div>
             
