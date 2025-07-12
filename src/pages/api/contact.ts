@@ -1,6 +1,6 @@
 import type { APIRoute } from 'astro';
 import { supabase } from '../../lib/supabase';
-import { sendContactNotification } from '../../lib/resend';
+import { sendContactNotification, sendContactConfirmation } from '../../lib/resend';
 
 export const prerender = false;
 
@@ -42,7 +42,10 @@ export const POST: APIRoute = async ({ request }) => {
     
     // Send email notification
     try {
-      await sendContactNotification(contactData);
+      await Promise.all([
+        sendContactNotification(contactData),
+        sendContactConfirmation(contactData)
+      ]);
     } catch (emailError) {
       console.error('Email error:', emailError);
       // Don't fail the request if email fails

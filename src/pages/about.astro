@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import { trainers } from '../lib/supabase';
 ---
 
 <Layout title="About Us - LbisTech" description="Learn about LbisTech's mission to provide world-class technology education">
@@ -110,45 +111,67 @@ import Footer from '../components/Footer.astro';
   <section class="py-16">
     <div class="container mx-auto px-4">
       <div class="text-center mb-12">
-        <h2 class="text-3xl font-bold text-gray-900 mb-4">Meet Our Team</h2>
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">Meet Our Expert Trainers</h2>
         <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-          Our experienced instructors and support staff are dedicated to your success.
+          Learn from industry professionals with years of real-world experience in cloud technologies and DevOps practices.
         </p>
       </div>
       
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div class="bg-white p-6 rounded-lg shadow-lg text-center">
-          <div class="w-24 h-24 bg-gradient-to-br from-coral-500 to-coral-600 rounded-full flex items-center justify-center mx-auto mb-4">
-            <span class="text-white font-bold text-2xl">DK</span>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+        {trainers.map(trainer => (
+          <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+            <div class="relative">
+              <img 
+                src={trainer.image} 
+                alt={trainer.name}
+                class="w-full h-48 object-cover"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+              <div class="absolute bottom-4 left-4 text-white">
+                <h3 class="text-lg font-bold">{trainer.name}</h3>
+                <p class="text-coral-300 text-sm">{trainer.title}</p>
+              </div>
+            </div>
+            
+            <div class="p-6">
+              <p class="text-gray-600 mb-4 text-sm line-clamp-3">{trainer.bio}</p>
+              
+              <div class="mb-4">
+                <div class="flex flex-wrap gap-2">
+                  {trainer.specializations.slice(0, 3).map(spec => (
+                    <span class="bg-gray-100 text-gray-700 px-2 py-1 rounded text-xs">
+                      {spec}
+                    </span>
+                  ))}
+                </div>
+              </div>
+              
+              <div class="grid grid-cols-2 gap-4 mb-4 text-center">
+                <div>
+                  <div class="text-lg font-bold text-coral-500">{trainer.successStats.passRate}</div>
+                  <div class="text-xs text-gray-500">Pass Rate</div>
+                </div>
+                <div>
+                  <div class="text-lg font-bold text-coral-500">{trainer.successStats.studentsmentored}</div>
+                  <div class="text-xs text-gray-500">Students</div>
+                </div>
+              </div>
+              
+              <a 
+                href={`/trainers/${trainer.id}`} 
+                class="w-full bg-coral-500 hover:bg-coral-600 text-white px-4 py-2 rounded-lg text-center font-semibold transition-colors block text-sm"
+              >
+                View Profile
+              </a>
+            </div>
           </div>
-          <h3 class="text-xl font-semibold text-gray-900 mb-2">Dr. Khan</h3>
-          <p class="text-coral-500 mb-3">Chief Technology Officer</p>
-          <p class="text-gray-600 text-sm">
-            15+ years in cloud architecture and DevOps. Former AWS Solutions Architect with extensive enterprise experience.
-          </p>
-        </div>
-        
-        <div class="bg-white p-6 rounded-lg shadow-lg text-center">
-          <div class="w-24 h-24 bg-gradient-to-br from-coral-500 to-coral-600 rounded-full flex items-center justify-center mx-auto mb-4">
-            <span class="text-white font-bold text-2xl">SA</span>
-          </div>
-          <h3 class="text-xl font-semibold text-gray-900 mb-2">Sarah Ahmed</h3>
-          <p class="text-coral-500 mb-3">Lead Instructor</p>
-          <p class="text-gray-600 text-sm">
-            Azure certified professional with 10+ years in cloud solutions. Passionate about making complex topics accessible.
-          </p>
-        </div>
-        
-        <div class="bg-white p-6 rounded-lg shadow-lg text-center">
-          <div class="w-24 h-24 bg-gradient-to-br from-coral-500 to-coral-600 rounded-full flex items-center justify-center mx-auto mb-4">
-            <span class="text-white font-bold text-2xl">MH</span>
-          </div>
-          <h3 class="text-xl font-semibold text-gray-900 mb-2">Muhammad Hassan</h3>
-          <p class="text-coral-500 mb-3">DevOps Specialist</p>
-          <p class="text-gray-600 text-sm">
-            Expert in containerization and CI/CD pipelines. Helps students bridge the gap between development and operations.
-          </p>
-        </div>
+        ))}
+      </div>
+      
+      <div class="text-center">
+        <a href="/trainers" class="bg-coral-500 hover:bg-coral-600 text-white px-8 py-3 rounded-lg font-semibold transition-colors">
+          Meet All Trainers
+        </a>
       </div>
     </div>
   </section>
