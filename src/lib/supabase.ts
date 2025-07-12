@@ -5,6 +5,36 @@ const supabaseAnonKey = import.meta.env.SUPABASE_ANON_KEY;
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
+export const trainers = [
+  {
+    id: 'usman',
+    name: 'Engr. Usman Ahmad',
+    title: 'AWS/GCP DevOps Trainer',
+    image: '/images/trainers/usman.jpg',
+    bio: 'Trainer with 4+ years of cloud and DevOps experience. Led 500+ students across AWS/GCP certifications.',
+    specializations: ['AWS', 'GCP', 'Kubernetes', 'Terraform', 'DevOps'],
+    successStats: {
+      passRate: '95%',
+      careerAdvancement: '90%',
+      studentsmentored: 500
+    }
+  },
+  {
+    id: 'sarah',
+    name: 'Sarah Khan',
+    title: 'Azure/DevOps Specialist',
+    image: '/images/trainers/sarah.jpg',
+    bio: 'Specialist in Azure DevOps and CI/CD automation with real-world consulting experience.',
+    specializations: ['Azure', 'CI/CD', 'Ansible', 'Jenkins'],
+    successStats: {
+      passRate: '92%',
+      careerAdvancement: '85%',
+      studentsmentored: 320
+    }
+  }
+  // You can add more trainers here
+];
+
 export interface ContactSubmission {
   id?: number;
   first_name: string;
@@ -45,58 +75,123 @@ export interface Course {
 
 export const courses: Course[] = [
   {
-    id: 'aws-2in1',
-    title: 'AWS 2-in-1 Certification',
-    description: 'Master Amazon Web Services with our comprehensive certification program covering both Solutions Architect and Developer tracks.',
-    duration: '12 weeks',
-    level: 'Intermediate',
+    id: 'aws-2-in-1',
+    title: 'AWS 2 In 1 (Solutions Architect & Developer Associate)',
+    description: 'Complete AWS certification bundle covering both Solutions Architect and Developer Associate certifications with hands-on labs and real-world projects.',
+    duration: '8-10 weeks',
+    level: 'Intermediate to Advanced',
     image: 'https://images.pexels.com/photos/11035471/pexels-photo-11035471.jpeg?auto=compress&cs=tinysrgb&w=800',
-    features: ['AWS Solutions Architect', 'AWS Developer Associate', 'Hands-on Projects', 'Exam Preparation'],
-    price: 299,
-    is_free: false
-  },
-  {
-    id: 'azure-2in1',
-    title: 'Azure 2-in-1 Certification',
-    description: 'Comprehensive Microsoft Azure certification combining Fundamentals and Administrator tracks for complete cloud mastery.',
-    duration: '10 weeks',
-    level: 'Intermediate',
-    image: 'https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=800',
-    features: ['Azure Fundamentals', 'Azure Administrator', 'Real-world Scenarios', 'Certification Prep'],
-    price: 279,
+    features: [
+      'AWS Cloud Fundamentals & Core Services',
+      'AWS Compute Services (EC2, Lambda, ECS)',
+      'AWS Storage & Database Services (S3, RDS, DynamoDB)',
+      'AWS Networking & Content Delivery (VPC, CloudFront)',
+      'AWS Security & Identity Management (IAM, KMS)',
+      'AWS Monitoring & Logging (CloudWatch, CloudTrail)',
+      'Hands-on Labs & Real-world Projects',
+      'Certification Exam Preparation & Practice Tests'
+    ],
+    price: 350,
     is_free: false
   },
   {
     id: 'devops-engineering',
     title: 'DevOps Engineering',
-    description: 'Complete DevOps pipeline mastery with CI/CD, automation, and infrastructure as code using industry-standard tools.',
-    duration: '16 weeks',
-    level: 'Advanced',
+    description: 'Comprehensive DevOps engineering course covering CI/CD, containerization, orchestration, and cloud infrastructure automation with industry best practices.',
+    duration: '10-12 weeks',
+    level: 'Intermediate to Advanced',
     image: 'https://images.pexels.com/photos/11035380/pexels-photo-11035380.jpeg?auto=compress&cs=tinysrgb&w=800',
-    features: ['CI/CD Pipelines', 'Infrastructure as Code', 'Monitoring & Logging', 'Automation Tools'],
-    price: 399,
+    features: [
+      'DevOps Fundamentals & Culture Transformation',
+      'CI/CD Pipeline Implementation with Jenkins',
+      'Containerization with Docker (Advanced Concepts)',
+      'Container Orchestration with Kubernetes',
+      'Infrastructure as Code with Terraform',
+      'Configuration Management with Ansible',
+      'Monitoring & Logging (Prometheus, Grafana, ELK Stack)',
+      'Security in DevOps (DevSecOps Practices)'
+    ],
+    price: 400,
     is_free: false
   },
   {
-    id: 'docker-containerization',
-    title: 'Docker Containerization',
-    description: 'Master containerization technology with Docker, Kubernetes, and orchestration for modern application deployment.',
-    duration: '8 weeks',
+    id: 'azure-2-in-1',
+    title: 'Azure 2 In 1 (AZ-900 & AZ-104)',
+    description: 'Microsoft Azure fundamentals and administrator certification bundle with practical lab exercises and comprehensive exam preparation.',
+    duration: '8-10 weeks',
+    level: 'Beginner to Intermediate',
+    image: 'https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=800',
+    features: [
+      'Azure Cloud Fundamentals & Core Services',
+      'Azure Compute Services (Virtual Machines, App Services)',
+      'Azure Storage Solutions & Database Services',
+      'Azure Networking & Virtual Networks',
+      'Azure Identity & Access Management (Azure AD)',
+      'Azure Security & Compliance',
+      'Azure Monitoring & Governance',
+      'Certification Exam Preparation'
+    ],
+    price: 320,
+    is_free: false
+  },
+  {
+    id: 'linux-deep-dive',
+    title: 'Linux Deep Dive',
+    description: 'Master Linux system administration from basics to advanced concepts including shell scripting, system security, and performance tuning.',
+    duration: '6-8 weeks',
+    level: 'Beginner to Advanced',
+    image: 'https://images.pexels.com/photos/11035471/pexels-photo-11035471.jpeg?auto=compress&cs=tinysrgb&w=800',
+    features: [
+      'Linux Fundamentals & System Architecture',
+      'Command Line Mastery & Shell Scripting',
+      'File System Management & Permissions',
+      'User & Group Management',
+      'Process Management & System Monitoring',
+      'Network Configuration & Security',
+      'System Performance Tuning',
+      'Advanced Shell Scripting & Automation'
+    ],
+    price: 250,
+    is_free: false
+  },
+  {
+    id: 'kubernetes',
+    title: 'Kubernetes',
+    description: 'Master Kubernetes container orchestration with hands-on labs covering deployment, scaling, and management of containerized applications.',
+    duration: '6-8 weeks',
     level: 'Intermediate',
     image: 'https://images.pexels.com/photos/11035471/pexels-photo-11035471.jpeg?auto=compress&cs=tinysrgb&w=800',
-    features: ['Docker Fundamentals', 'Kubernetes Orchestration', 'Container Security', 'Deployment Strategies'],
-    price: 199,
+    features: [
+      'Kubernetes Architecture & Core Concepts',
+      'Pods, Services, and Deployments',
+      'ConfigMaps & Secrets Management',
+      'Persistent Volumes & Storage',
+      'Networking & Service Discovery',
+      'Kubernetes Security & RBAC',
+      'Monitoring & Logging in Kubernetes',
+      'Helm Charts & Package Management'
+    ],
+    price: 280,
     is_free: false
   },
   {
-    id: 'opensource-voip',
-    title: 'Open Source VoIP',
-    description: 'Build and deploy VoIP solutions using open-source technologies like Asterisk, FreeSWITCH, and SIP protocols.',
-    duration: '6 weeks',
+    id: 'docker',
+    title: 'Docker',
+    description: 'Learn containerization with Docker from basics to advanced concepts including image creation, networking, and orchestration.',
+    duration: '4-6 weeks',
     level: 'Beginner',
     image: 'https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=800',
-    features: ['Asterisk Configuration', 'SIP Protocol', 'Voice Quality Optimization', 'System Integration'],
-    price: 149,
+    features: [
+      'Docker Fundamentals & Architecture',
+      'Docker Images & Containers',
+      'Dockerfile Best Practices',
+      'Docker Networking & Storage',
+      'Docker Compose & Multi-container Applications',
+      'Docker Registry & Image Management',
+      'Container Security & Best Practices',
+      'Integration with CI/CD Pipelines'
+    ],
+    price: 200,
     is_free: true
   }
-];
+]
